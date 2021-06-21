@@ -36,6 +36,11 @@ def delete_patient(id: int, db: Session = Depends(get_db)):
     return patient.delete(id, db)
 
 
+@router.get("/{id}/summary", response_model=schemas.ShowSummary, status_code=status.HTTP_200_OK)
+async def get_patient_summary(id: int, db: Session = Depends(get_db)):
+    return patient.show_summary(id, db)
+
+
 @router.get("/{id}/allergies", response_model=schemas.ShowAllergy,  status_code=status.HTTP_200_OK)
 async def get_patient_allergies(id: int, db: Session = Depends(get_db)):
     return patient.show_allergies(id, db)
@@ -55,9 +60,5 @@ def update_patient_allergy(patient_id: int, id: int, request: schemas.AllergyBas
 def delete_patient_allergy(patient_id: int, id: int, db: Session = Depends(get_db)):
     return patient.delete_patient_allergy(patient_id, id, db)
 
-
-@router.get("/{id}/summary", response_model=schemas.ShowSummary, status_code=status.HTTP_200_OK)
-async def get_patient_summary(id: int, db: Session = Depends(get_db)):
-    return patient.show_summary(id, db)
 
 

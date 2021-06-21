@@ -99,7 +99,7 @@ def delete_patient_allergy(patiend_id: int, id: int, db: Session):
 
     patient_allergy.delete(synchronize_session=False)
     db.commit()
-    return 'deleted'
+    return {'status': 'record deleted'}
 
 
 def show_summary(id: int, db: Session):
