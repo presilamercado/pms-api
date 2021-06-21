@@ -56,7 +56,7 @@ def update_patient_allergy(patient_id: int, id: int, request: schemas.AllergyBas
     return patient.update_patient_allergy(patient_id, id, request, db)
 
 
-@router.delete('/{patient_id}/allergies/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/{patient_id}/allergies/{id}', status_code=status.HTTP_200_OK)
 def delete_patient_allergy(patient_id: int, id: int, db: Session = Depends(get_db)):
     return patient.delete_patient_allergy(patient_id, id, db)
 
