@@ -3,11 +3,10 @@ from models import models
 from schemas import schemas
 from fastapi import HTTPException, status
 
+
 def get_all(db: Session):
     patients = db.query(models.Patient).all()
     return patients
-
-
 
 
 def create(request: schemas.PatientCreate, db: Session):
@@ -57,6 +56,7 @@ def delete(id: int, db: Session):
     db.commit()
     return {'status': 'record deleted'}
 
+
 def add_allergies(id: int, request: schemas.Allergy, db: Session):
     new_allergy = models.PatientAllergy(
         patient_id=id,
@@ -68,12 +68,14 @@ def add_allergies(id: int, request: schemas.Allergy, db: Session):
     db.refresh(new_allergy)
     return new_allergy
 
+
 def show_allergies(id: int, db: Session):
     patient = db.query(models.Patient).filter(models.Patient.id == id).first()
     if not patient:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Patient with the id:{id} is not available")
     return patient
+
 
 def update_patient_allergy(patient_id: int, id: int, request: schemas.Allergy, db: Session):
     patient_allergy = db.query(models.PatientAllergy).filter(models.PatientAllergy.patient_id == patient_id, models.PatientAllergy.id == id)
@@ -87,6 +89,7 @@ def update_patient_allergy(patient_id: int, id: int, request: schemas.Allergy, d
     patient_allergy = db.query(models.Patient).filter(models.Patient.id == patient_id).first()
     return patient_allergy
 
+
 def delete_patient_allergy(patiend_id: int, id: int, db: Session):
     patient_allergy = db.query(models.PatientAllergy).filter(models.PatientAllergy.patient_id == patiend_id, models.PatientAllergy.id == id)
 
@@ -97,6 +100,7 @@ def delete_patient_allergy(patiend_id: int, id: int, db: Session):
     patient_allergy.delete(synchronize_session=False)
     db.commit()
     return 'deleted'
+
 
 def show_summary(id: int, db: Session):
     patient = db.query(models.Patient).filter(models.Patient.id == id).first()

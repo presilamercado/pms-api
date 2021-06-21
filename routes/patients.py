@@ -46,12 +46,12 @@ async def add_patient_allergy(id: int, request: schemas.AllergyCreate, db: Sessi
     return patient.add_allergies(id, request, db)
 
 
-@router.put('/{patient_id}/{id}', response_model=schemas.ShowAllergy, status_code=status.HTTP_202_ACCEPTED)
+@router.put('/{patient_id}/allergies/{id}', response_model=schemas.ShowAllergy, status_code=status.HTTP_202_ACCEPTED)
 def update_patient_allergy(patient_id: int, id: int, request: schemas.AllergyBase, db: Session = Depends(get_db)):
     return patient.update_patient_allergy(patient_id, id, request, db)
 
 
-@router.delete('/{patient_id}/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/{patient_id}/allergies/{id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_patient_allergy(patient_id: int, id: int, db: Session = Depends(get_db)):
     return patient.delete_patient_allergy(patient_id, id, db)
 
