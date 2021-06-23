@@ -41,7 +41,7 @@ async def get_patient_summary(id: int, db: Session = Depends(get_db)):
     return patient.show_summary(id, db)
 
 
-@router.get("/{id}/allergies", response_model=schemas.ShowAllergy,  status_code=status.HTTP_200_OK)
+@router.get("/{id}/allergies", response_model=schemas.ShowAllergies,  status_code=status.HTTP_200_OK)
 async def get_patient_allergies(id: int, db: Session = Depends(get_db)):
     return patient.show_allergies(id, db)
 

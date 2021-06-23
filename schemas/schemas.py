@@ -19,11 +19,13 @@ class AllergyBase(BaseModel):
 
 class Allergy(AllergyBase):
     id: int
+    patient_id: int
     class Config():
         orm_mode = True
 
 class AllergyCreate(AllergyBase):
     pass
+
 
 class PatientCreate(PatientBase):
     pass
@@ -41,8 +43,12 @@ class ShowPatient(BaseModel):
     class Config():
         orm_mode = True
 
-class ShowAllergy(BaseModel):
-    id: int
+
+class ShowAllergy(Allergy):
+    class Config():
+        orm_mode = True
+
+class ShowAllergies(BaseModel):
     patient_allergies: List[Allergy] = []
     class Config():
         orm_mode = True

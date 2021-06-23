@@ -86,7 +86,7 @@ def update_patient_allergy(patient_id: int, id: int, request: schemas.Allergy, d
 
     patient_allergy.update(request.dict())
     db.commit()
-    patient_allergy = db.query(models.Patient).filter(models.Patient.id == patient_id).first()
+    patient_allergy = db.query(models.PatientAllergy).filter(models.PatientAllergy.id == id).first()
     return patient_allergy
 
 
